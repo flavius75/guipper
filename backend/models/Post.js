@@ -1,10 +1,31 @@
-const mongoose = require('mongoose');
+'use strict';
+const {Model} = require('sequelize');
 
-const postSchema = mongoose.Schema({
-  content: { type: String, required: true },
-  userId: { type: String, required: true },
-  postDate : {type: Date, required: true}
-  
-});
-
-module.exports = mongoose.model('Post', postSchema);
+module.exports = (sequelize, DataTypes) => {
+  class Post extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // define association here
+      models.Post.belongsTo(models.User, {
+        foreignKey:{
+          allowNull:false,
+        }
+      })
+    }
+  };
+  Post.init({
+    idPost: DataTypes.INTEGER,
+    idUser: DataTypes.INTEGER,
+    postDate: DataTypes.DATE,
+    idRecord: DataTypes.INTEGER,
+    content: DataTypes.TEXT
+  }, {
+    sequelize,
+    modelName: 'Post',
+  });
+  return Post;
+};

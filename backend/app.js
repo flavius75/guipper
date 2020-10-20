@@ -1,17 +1,12 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
+const {Sequelize} = require('sequelize');
 const postRoutes = require('./routes/post');
+const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
+
 require('dotenv/config');
-
-
-mongoose.connect(process.env.DB_CONNECTION,
-  { useNewUrlParser: true,
-    useUnifiedTopology: true })
-  .then(() => console.log('Connexion à MongoDB réussie !'))
-  .catch(() => console.log('Connexion à MongoDB échouée !'));
 
   
 
@@ -25,7 +20,10 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 
 app.use('/api/post', postRoutes);
-app.use('/api/auth', userRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/users', userRoutes);
+
+
 
 
 module.exports=app;

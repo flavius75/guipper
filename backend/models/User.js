@@ -1,18 +1,34 @@
-const mongoose = require('mongoose');
-const uniqueValidator = require('mongoose-unique-validator');
-
-const userSchema = mongoose.Schema({
-  email: { type: String, required: true, unique: true },
-  firstname:{ type: String, required: true },
-  lastname:{ type: String, required: true },
-  sex: { type: String, required: true },
-  birthday:{ type: Date, required: true },
-  phone:{ type: String, required: false },
-  isPremium :{ type: Boolean, required: true },
-  password: { type: String, required: true },
-  bio: { type: String, required: false },
-});
-
-userSchema.plugin(uniqueValidator);
-
-module.exports = mongoose.model('User', userSchema);
+'use strict';
+const {
+  Model
+} = require('sequelize');
+module.exports = (sequelize, DataTypes) => {
+  class User extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // define association here
+      models.User.hasMany(models.Post);
+      models.User.hasMany(models.Record);
+    }
+  };
+  User.init({
+    id: {type:DataTypes.INTEGER, primaryKey: true},
+    firstname: DataTypes.STRING,
+    lastname: DataTypes.STRING,
+    sex: DataTypes.STRING,
+    birthday: DataTypes.DATE,
+    phone: DataTypes.STRING,
+    email: DataTypes.STRING,
+    password: DataTypes.STRING,
+    idRole: DataTypes.INTEGER,
+    bio:DataTypes.STRING
+  }, {
+    sequelize,
+    modelName: 'User',
+  });
+  return User;
+};
