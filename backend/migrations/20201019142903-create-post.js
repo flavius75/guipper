@@ -8,17 +8,13 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      idUser: {
+      userId: {
         type: Sequelize.INTEGER,
         allowNull: false, 
         references: {
           model: 'Users', 
           key:'id'
         }
-      },
-      postDate: {
-        type: Sequelize.DATE,
-        allowNull: false,
       },
       idRecord: {
         type: Sequelize.INTEGER,

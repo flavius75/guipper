@@ -14,7 +14,6 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Record.init({
-    recordDate: DataTypes.DATE,
     recordPath: DataTypes.STRING,
   }, {
     sequelize,

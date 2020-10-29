@@ -18,12 +18,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Post.init({
-    idPost: DataTypes.INTEGER,
-    idUser: DataTypes.INTEGER,
-    postDate: DataTypes.DATE,
+    id: {type:DataTypes.INTEGER, primaryKey: true},
     idRecord: DataTypes.INTEGER,
-    content: DataTypes.TEXT
-  }, {
+    content: DataTypes.TEXT,
+    likes: DataTypes.INTEGER,
+  },{
     sequelize,
     modelName: 'Post',
   });

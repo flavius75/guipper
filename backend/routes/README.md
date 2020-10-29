@@ -13,4 +13,3 @@ GET /api/posts/
 POST /api/posts/
 PUT /api/posts/:id
 DELETE /api/posts/:id
-s
