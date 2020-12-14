@@ -1,23 +1,24 @@
 import React from 'react'
-import {StyleSheet, View, Text,Image} from 'react-native'
+import {StyleSheet, View, Text,Image,FlatList} from 'react-native'
 import AudioContent from './Audio'
+import Song from './Audio'
 
-//regarder affichage conditionale + Ancrage barre de recherche + sound
+//regarder affichage conditionale + Ancrage barre de recherche + source image par variable
 
 class ContentItem extends React.Component
 {
     render()
     {
+        //console.log("****DEBUG****")
         const info = this.props.content
-        console.log("****DEBUG****")
-        console.log(info.photo)
+        //console.log(info.photo)
         return(
             <View style={styles.mainFrame}> 
                 <View style={styles.posterInfo}>
                     <View style={styles.user}>
                         <Image
                             style={styles.image}
-                            source={{uri: 'https://www.creads.fr/app/uploads/sites/1/2017/09/xlogo-tinder.png.pagespeed.ic.4Rb5KKNMhK.png'}}
+                            source={info.photo}
                         />
                         <Text style={styles.username}>{info.artist}</Text>
                     </View>
@@ -33,9 +34,9 @@ class ContentItem extends React.Component
                     <Text>Infos à afficher</Text>
                     <Image
                         style={styles.imageMain}
-                        source={require('../images/minilogo.png')}
-                    />   
-                    <AudioContent />       
+                        source={info.photo}
+                    /> 
+                    <AudioContent song={info.content} />
                 </View>
 
                 <View style={styles.feedback}>
@@ -94,11 +95,10 @@ const styles = StyleSheet.create(
         },
         imageMain:
         {
-            height:250,
-            width: 250,
+            height:350,
+            width: 350,
             justifyContent :'center',
             alignItems:'center',
-            margin: 5,
             backgroundColor: 'white'
         },
         username:

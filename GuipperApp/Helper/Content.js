@@ -2,38 +2,38 @@ export default data = [
     {
        id:1,
        artist:"Emmanuel Bica",
-       photo:"../images/minilogo.png",
+       photo:require("../images/laink.jpg"),
        description:"Mon nouveau hit",
-       content:"../media/Corneille - Careless Whisper (Session studio).mp3"
+       content:require("../media/Under_Seventeen_Palmashow.mp3")
 
     },
     {
         id:2,
         artist:"Flavius Da Cruz",
-        photo:"../images/minilogo.png",
+        photo:require("../images/lennon.png"),
         description:"Mon nouveau hit",
-        content:"../media/Paula Fernandes - Traidor.mp3"
+        content:require("../media/PaulaFernandes-Traidor.mp3")
     },
     {
         id:3,
         artist:"Mama Nguyen",
-        photo:"../images/minilogo.png",
+        photo:require("../images/minilogo.png"),
         description:"Mon nouveau hit",
-        content:"../media/Paula Fernandes - Traidor.mp3"
+        content:require("../media/PaulaFernandes-Traidor.mp3")
     },
     {
         id:4,
         artist:"Joao Touré",
-        photo:"../images/minilogo.png",
+        photo:require("../images/chemise.jpg"),
         description:"Mon nouveau hit",
-        content:"../media/Paula Fernandes - Traidor.mp3"
+        content:require("../media/PaulaFernandes-Traidor.mp3")
     },
     {
         id:5,
         artist:"BigLeagueMDB",
-        photo:"../images/minilogo.png",
+        photo:require("../images/MDB.jpg"),
         description:"Just whistle to this",
-        content:"../media/Deadly Premonition-Life is Beautiful.mp3"
+        content:require("../media/DeadlyPremonition-LifeisBeautiful.mp3")
     }
 
  ]
