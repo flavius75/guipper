@@ -1,17 +1,37 @@
 import React from 'react'
 import {StyleSheet, View, Text,Image,FlatList} from 'react-native'
 import AudioContent from './Audio'
-import Song from './Audio'
+import { FontAwesome } from '@expo/vector-icons';
 
-//regarder affichage conditionale + Ancrage barre de recherche + source image par variable
-
+let clik=0
 class ContentItem extends React.Component
 {
+    state = {
+        likes: String(0)
+      };
+
+      addLike = () => {
+          let newCount
+          if(clik%2==0){
+           newCount = Number(this.state.likes) + 1;  
+           clik=clik+1
+           this.setState({
+            likes: String(newCount)
+          }); 
+          }else{
+            newCount = Number(this.state.likes) -1; 
+            clik=clik+1
+            this.setState({
+                likes: String(newCount)
+              });  
+          }
+
+      };
+    
     render()
     {
         //console.log("****DEBUG****")
         const info = this.props.content
-        //console.log(info.photo)
         return(
             <View style={styles.mainFrame}> 
                 <View style={styles.posterInfo}>
@@ -30,26 +50,19 @@ class ContentItem extends React.Component
                     </View>
                 </View>
 
-                <View style={styles.content}>
-                    <Text>Infos à afficher</Text>
-                    <Image
-                        style={styles.imageMain}
-                        source={info.photo}
-                    /> 
-                    <AudioContent song={info.content} />
+                <View>
+                    <AudioContent song={info.content} photo={info.photo}/>
                 </View>
 
                 <View style={styles.feedback}>
-                    <Text>Coment like share</Text>
+                <FontAwesome.Button name="heart-o" backgroundColor='#FFFFFF' color="#000000" size={22} onPress={this.addLike}>{this.state.likes}</FontAwesome.Button>
+                <FontAwesome.Button name="commenting-o" backgroundColor='#FFFFFF' color="#000000" size={22} onPress={null}>Comment</FontAwesome.Button>
+                <FontAwesome.Button name="share" backgroundColor='#FFFFFF' color="#000000" size={22} onPress={null}>Share</FontAwesome.Button>
                 </View>
             </View>
         )
       }
-    }
-
-
-    //Content il faut le remplacer par une FlatList, et la rendre dinamique
-    //Voir aussi ScrollView    
+    }  
 
 const styles = StyleSheet.create(
     {
@@ -74,8 +87,9 @@ const styles = StyleSheet.create(
         feedback:
         {
             //borderWidth: 5,
-            justifyContent: "flex-end",
-            alignItems: 'flex-start'
+            flexDirection:'row',
+            justifyContent:'space-between',
+            alignItems:'center'
         },
         mainFrame:
         {
@@ -88,15 +102,15 @@ const styles = StyleSheet.create(
         },
         image:
         {
-            width: 30,
-            height: 30,
+            width: 35,
+            height: 35,
             margin: 5,
             backgroundColor: 'white'
         },
         imageMain:
         {
-            height:350,
-            width: 350,
+            height:400,
+            width: "100%",
             justifyContent :'center',
             alignItems:'center',
             backgroundColor: 'white'

@@ -1,45 +1,70 @@
 import React from 'react'
 import { StyleSheet, TouchableOpacity, View, Image, Button } from 'react-native'
 import { Audio } from 'expo-av';
-import { render } from 'react-dom';
+import { FontAwesome } from '@expo/vector-icons'; 
 
 
- let number = 0 //varible qui permet de savoir si on passe par la premiere fois ou deuxieme fois par le boutton
+ let state = true //varible qui permet de savoir si on passe par la premiere fois ou deuxieme fois par le boutton
+ let icon = "play-circle-o"
+ let backgroundIcon = "square"
 
  export default function AudioContent(song)
     { 
+      console.clear()
       const test =song//on recupere les infos passées en parametre par le props de ./ContentItem
-      console.log(test)//DEBUG
+      
       const [sound, setSound] = React.useState();
-      //playSound(test)
+      
       
       function play()//fonction à appeler avec le boutton qui permet d'appeler la fonction qui gere le fait de jouer du son
       {
-        playSound(test)
+        if(state)
+        {
+          icon=null
+          backgroundIcon=null
+          playSound(test)
+        }
+        else{
+          icon="play-circle-o"
+          backgroundIcon="square"
+          playSound(test)
+        }
+
       }
 
       async function playSound(test) 
       {
-        console.log('Loading Sound');//DEBUG
-        console.log("->"+test.song)//DEBUG
-        const { sound } = await Audio.Sound.createAsync(test.song);//Creation de notre son
-        //const sound= new Audio.Sound()
-        //await sound.loadAsync(song)
+        const { sound } = await Audio.Sound.createAsync(test.song,{
+          progressUpdateIntervalMillis: 500,
+          positionMillis: 0,
+          shouldPlay: false,
+          rate: 1.0,
+          shouldCorrectPitch: false,
+          volume: 1.0,
+          isMuted: false,
+          isLooping: false,
+        });//Creation de notre son
         setSound(sound);
       
-        //console.log(number)
-        if(number%2===0)//premier appye play
+        if(state)//premier appye play
         {
           console.log('Playing Sound'+"->"+test.song);//DEBUG
           await sound.playAsync();//play
-          number=number+1//incrementation
+          state=false
+          
         }
-        else{//deuxime appuuye stop
+        else//deuxime appuuye stop
+        {
           console.log('Stopping Sound'+"->"+test.song);//DEBUG
           await sound.pauseAsync();//stop
-          number=number+1//incrementation
+          state=true
+          
         }
-        //console.log(number)
+        //S'il y a des erreurs c'est ici -> barre de progression
+      
+
+
+        //
       }
 
       React.useEffect(() => {
@@ -49,13 +74,38 @@ import { render } from 'react-dom';
       }, [sound]);
 
 
+      
       //Affichage du Button permet de jouer ou stopper la musique
       return(
-        <View>
-          <Button title='Play Song' onPress={play} />
+        <View style={{flex:1}}>
+          <TouchableOpacity onPress={play} >
+            <Image source={test.photo} style={styles.image} />
+            <FontAwesome name={backgroundIcon} size={148} color="black" style={{position:"absolute",top:"33%",right:"33%",opacity:0.5}}/>
+            <FontAwesome name={icon} size={150} color="white"  style={{position:"absolute",top:"33%",right:"33%",opacity:0.88}}/>
+            
+          </TouchableOpacity>
         </View>
       )
     }
+
+    const styles = StyleSheet.create(
+      {
+        image:
+        {
+          height:400,
+          width: "100%",
+          justifyContent :'center',
+          alignItems:'center',
+          backgroundColor: 'white'
+      },
+      content:
+      {
+        width: "100%",
+        justifyContent : 'center',
+        alignItems:'center'
+      },
+      }
+    )
 
 
     
