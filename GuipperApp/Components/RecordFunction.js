@@ -4,7 +4,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import { Audio } from 'expo-av'; 
 
 
-const flav = "http://93.27.221.66:3000/api/records"
+const flav = "http://82.210.1.25:3000"
 const pts = "https://ptsv2.com/t/GuipperApp/post"
 
 let icon = "circle"
@@ -52,7 +52,7 @@ export default function RecordFunction() {
       data.append('record', sound);
       data.append('title', 'Enregistrement');
   
-      let request = fetch('http://93.27.221.66:3000/api/records', {
+      let request = fetch('http://82.210.1.25:3000/api/records', {
         method:'post',
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -88,11 +88,11 @@ export default function RecordFunction() {
 
   return (
     <View style={{flex:1}}>
-      <View style={{flex:1}} >
+      <View style={{flex:3}} >
         <Text style={styles.title}>Instructions</Text>
         <Text style={styles.text}>Work in progress, trying to catch the sound from the smartphone to send to Guipper servers</Text>
-        <FontAwesome name={backgroundIcon} size={160} color="black" backgroundColor="white" style={{position:"absolute",top:"22.75%",right:"33%",opacity:0.5}}></FontAwesome>
-        <FontAwesome name={icon} size={80} color={setColor} backgroundColor="white"  style={{position:"absolute",top:"29.5%",right:"42.18%",opacity:0.88}} onPress={go}></FontAwesome>
+        <FontAwesome name={backgroundIcon} size={160} color="black" backgroundColor="white" style={{position:"absolute",top:"45%",right:"33%",opacity:0.5}}></FontAwesome>
+        <FontAwesome name={icon} size={80} color={setColor} backgroundColor="white"  style={{position:"absolute",top:"58%",right:"42.18%",opacity:0.88}} onPress={go}></FontAwesome>
         <Text style={styles.text}>Press the red circle to start to record</Text>
         <Text style={styles.text}>To stop press the pause Button, the audio file is automaticly sent to our servers</Text>
       </View>

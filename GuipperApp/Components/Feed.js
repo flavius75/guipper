@@ -5,6 +5,7 @@ import { FontAwesome, MaterialCommunityIcons, Fontisto } from '@expo/vector-icon
 import content from '../Helper/Content'
 import ContentItem from './ContentItem'
 
+
 class Feed extends React.Component{
   render()
   {
@@ -23,10 +24,10 @@ class Feed extends React.Component{
         </View>
         <View style={styles.nav}>
           <FontAwesome.Button name="home" backgroundColor='#FFFFFF' color="#000000" size={22} onPress={()=>this.props.navigation.navigate("Home")}></FontAwesome.Button>
-          <FontAwesome.Button name="music" backgroundColor='#FFFFFF' color="#000000" size={22} onPress={null}></FontAwesome.Button>
+          <FontAwesome.Button name="music" backgroundColor='#FFFFFF' color="#000000" size={22} onPress={()=>this.props.navigation.navigate("MySounds")}></FontAwesome.Button>
           <FontAwesome.Button name="circle-o-notch" size={22} color="#C31432" onPress={()=>this.props.navigation.navigate("Record")} backgroundColor='#FFFFFF'></FontAwesome.Button>
           <FontAwesome name="compass" backgroundColor='#FFFFFF' color="#000000" size={22} onPress={null}></FontAwesome>
-          <FontAwesome.Button name="navicon" backgroundColor='#FFFFFF' color="#000000" size={22} onPress={null}></FontAwesome.Button>
+          <FontAwesome.Button name="navicon" backgroundColor='#FFFFFF' color="#000000" size={22} onPress={()=>this.props.navigation.navigate("Profile")}></FontAwesome.Button>
         </View>
       </View>
     );
